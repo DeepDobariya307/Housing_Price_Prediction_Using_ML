@@ -185,15 +185,23 @@ Scatter plot of Avg. Area Number of Bedrooms vs Price, with LR and MLR overlaid.
 
 ## 🔍 Results & Comparison
 
-Sample prediction from **Sheet 1** at Avg. Area Income = $75,079:
+Both models were evaluated on a held-out test set (40% of the data, `random_state=101`) — see `Linear_Regression_Model.ipynb` for the full evaluation:
+
+| Metric | Simple LR (income only) | MLR (all 5 features) |
+|---|---|---|
+| **Test R²** | 0.42 | **0.92** |
+| **Test RMSE** | ~$271,500 | **~$102,300** |
+| **Test MAE** | — | **~$82,300** |
+
+Sample prediction from **Sheet 1** at Avg. Area Income = $75,079, as an illustration:
 
 | | Value |
 |---|---|
 | ✅ Actual Price | **$2,108,376** |
-| 🔴 LR Prediction | **$1,369,752** *(off by ~$738K — trained on one variable)* |
-| 🟢 MLR Prediction | **$2,128,118** *(off by only ~$20K — trained on all features)* |
+| 🔴 LR Prediction | **$1,369,752** |
+| 🟢 MLR Prediction | **$2,128,118** |
 
-**Conclusion:** MLR significantly outperforms simple LR. Training on a single variable (income) leaves too much variance unexplained, while MLR captures the combined effect of income, house age, rooms, bedrooms, and population — achieving near-perfect predictions.
+**Conclusion:** Income alone explains less than half of the price variance (test R² = 0.42). Adding house age, rooms, bedrooms, and population lifts test R² to 0.92 and cuts RMSE by roughly 62% — house prices are driven by the combined effect of multiple area features, not any single variable.
 
 ---
 
